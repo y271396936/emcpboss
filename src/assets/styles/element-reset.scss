@@ -1,0 +1,76 @@
+// 重置 element-ui 样式
+
+@import "env";
+
+.el-scrollbar__bar {
+  &.is-horizontal {
+    height: 8px;
+  }
+  &.is-vertical {
+    width: 8px;
+  }
+}
+
+.el-table {
+  &--small {
+    // 缩减单元格的边距
+    td, th {
+      padding: 2px 0;
+    }
+    thead {
+      td, th {
+        padding: 5px 0;
+      }
+    }
+  }
+
+  // 单元格数据默认居中
+  & td, & th {
+    text-align: center;
+  }
+
+  .option {
+    .el-button+.el-button {
+      margin: 0;
+    }
+  }
+}
+
+.el-table__footer {
+  .has-gutter {
+    td {
+      .cell {
+        text-align: right;
+      }
+    }
+  }
+}
+
+.el-popover__reference{
+  padding: 0px;
+}
+.el-table--small td, .el-table--small th,.el-button--text{
+  padding:6px 0;
+}
+.el-table th,.el-table thead.is-group th{
+  background-color: #e5edfa;
+}
+.el-table td, .el-table th.is-leaf{
+  border-bottom: 1px solid #b4c0da;
+}
+.content .content-text a,.cell a{
+  color: #000000!important;
+}
+.el-table--border td, .el-table--border th, .el-table__body-wrapper .el-table--border.is-scrolling-left~.el-table__fixed{
+  border-right: 1px solid #d9dce2;
+}
+.el-table--border th, .el-table__fixed-right-patch{
+  border-right: 1px solid #d9dce2;
+  border-bottom: 1px solid #d9dce2;
+}
+.el-table--border td, .el-table--border th, .el-table__body-wrapper .el-table--border.is-scrolling-left ~ .el-table__fixed{
+  border-right: 1px solid rgba(217, 220, 226, 0.47);
+}
+.el-breadcrumb, .el-breadcrumb__item, .el-breadcrumb__inner, .el-breadcrumb__separator, .fa-icon{
+  vertical-align:middle;
+}

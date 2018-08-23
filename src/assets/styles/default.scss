@@ -1,0 +1,120 @@
+@import "env";
+
+code {
+  color: $color-secondary;
+  background-color: $color-primary-tint;
+  margin: 0 4px;
+  display: inline-block;
+  padding: 1px 5px;
+  font-size: 12px;
+  border-radius: 3px;
+  height: 18px;
+  line-height: 18px;
+}
+
+hr {
+  border: 1px dashed $color-white-tint;
+  border-top: 0;
+}
+
+a {
+  display: inline-block;
+  white-space: nowrap;
+  color: #409EFF;
+  //color: #000000!important;
+  text-decoration: none;
+  outline: 0;
+  transition: .1s;
+
+  &:active {
+    color: #3a8ee6;
+    background-color: transparent;
+  }
+
+  &:focus, &:hover {
+    color: #66b1ff;
+    border-color: transparent;
+    background-color: transparent;
+  }
+}
+
+.ms-caution {
+  color: $color-caution;
+}
+.ms-danger {
+  color: $color-danger;
+  //color: #606266;
+}
+.ms-success {
+  //color: $color-success;
+  color: #606266;
+}
+.ms-info {
+  //color: $color-info;
+  color: #606266;
+}
+.ms-warning {
+  color: $color-warning;
+}
+.ms-gray {
+  color: $color-gray;
+}
+
+.ms-icon-btn {
+  color: $color-info;
+  cursor: pointer;
+}
+
+.ms-invalid {
+  color: $color-gray;
+  text-decoration: line-through;
+}
+
+.main-section {
+  .operation {
+    line-height: 36px;
+    height: 36px;
+    margin-right: 15px;
+    .el-breadcrumb {
+      display: inline-block;
+    }
+    .el-button-group {
+      float: right;
+    }
+  }
+
+  .pagination {
+    padding: 10px;
+    text-align: center;
+  }
+}
+
+.ms-tree {
+  .el-button--mini {
+    font-size: 12px;
+    padding: 3px 5px;
+  }
+}
+
+.slide {
+  .el-input__inner {
+    height: 32px;
+    line-height: 32px;
+  }
+}
+
+.ke-icon-seo-section {
+  display: inline-block;
+  width: 22px;
+  height: 15px;
+  background: url(/static/kindeditor/4.1.11/themes/default/default.png) 0 -592px;
+}
+.el-input-group__append, .el-input-group__prepend {
+  padding: 0 7px;
+}
+.el-input__inner {
+  padding: 0 5px;
+}
+.el-input-group {
+  vertical-align: middle;
+}

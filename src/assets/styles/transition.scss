@@ -1,0 +1,80 @@
+// 公用过渡效果
+
+// 渐隐渐显
+.fade {
+  &-enter {
+    opacity: 0;
+    &-active {
+      transition: opacity .5s;
+    }
+  }
+  &-leave {
+    &-active {
+      transition: opacity .5s;
+    }
+    &-to {
+      opacity: 0
+    }
+  }
+
+  // 渐显
+  &-in {
+    &-enter {
+      opacity: 0;
+      &-active {
+        transition: opacity .5s;
+      }
+    }
+  }
+
+  // 渐隐
+  &-out {
+    &-leave {
+      &-active {
+        transition: opacity .5s;
+      }
+      &-to {
+        opacity: 0
+      }
+    }
+  }
+}
+
+// 滑动
+.slide {
+  // 上滑动
+  &-top-enter-active, &-top-leave-active {
+    transition: all .5s ease-out;
+  }
+  &-top-enter, &-top-leave-to {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+
+  // 右滑动
+  &-right-enter-active, &-right-leave-active {
+    transition: all .5s ease-out;
+  }
+  &-right-enter, &-right-leave-to {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+
+  // 下滑动
+  &-bottom-enter-active, &-bottom-leave-active {
+    transition: all .5s ease-out;
+  }
+  &-bottom-enter, &-bottom-leave-to {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+
+  // 左滑动
+  &-left-enter-active, &-left-leave-active {
+    transition: all .5s ease-out;
+  }
+  &-left-enter, &-left-leave-to {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+}

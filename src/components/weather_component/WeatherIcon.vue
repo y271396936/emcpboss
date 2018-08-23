@@ -1,0 +1,413 @@
+<template>
+  <div>
+    <div v-if="item === '晴'" class="icon sunny">
+      <div class="sun">
+        <div class="rays"></div>
+      </div>
+    </div>
+    <!--v-if="item === '中雨' || item === '大到暴雨'-->
+    <!--|| item === '大雨' || item === '中到大雨' || item === '小雨'-->
+    <!--|| item === '阵雨'" -->
+    <template>
+      <div v-if="item === '雷阵雨'" class="icon thunder-storm">
+        <div class="cloud"></div>
+        <div class="lightning">
+          <div class="bolt"></div>
+          <div class="bolt"></div>
+        </div>
+      </div>
+      <div v-else-if="new RegExp(/雨/).test(item) && new RegExp('^((?!雷).)*$').test(item)" class="icon rainy">
+        <div class="cloud"></div>
+        <div class="rain"></div>
+      </div>
+    </template>
+    <div v-if="item === '多云' || item === '阴'" class="icon cloudy">
+      <div class="cloud"></div>
+      <div class="cloud"></div>
+    </div>
+    <!--未标记天气-->
+    <!--v-if="item === '阵雪' || item === '小雪' || item === '中雪' || item === '大雪'"-->
+    <div v-if="new RegExp(/雪/).test(item)" class="icon flurries">
+      <div class="cloud"></div>
+      <div class="snow">
+        <div class="flake"></div>
+        <div class="flake"></div>
+      </div>
+    </div>
+    <!--未标记天气-->
+    <div v-if="item === '未标记天气：太阳雨'" class="icon sun-shower">
+      <div class="cloud"></div>
+      <div class="sun">
+        <div class="rays"></div>
+      </div>
+      <div class="rain"></div>
+    </div>
+  </div>
+</template>
+<script>
+  export default {
+    props: {
+      item: {
+        type: String
+      }
+    }
+  }
+</script>
+<style lang="scss" scoped>
+  /* 天气图标样式 */
+  .icon {
+    position: relative;
+    display: inline-block;
+    font-size: 0.8em; /* control icon size here */
+    margin: 38px 0 40px 10px;
+  }
+  .icon-box{
+    width:100%;
+    height:55px;
+  }
+  .sun {
+    width: 2.5em;
+    height: 2.5em;
+    margin: -1.25em;
+    background: currentColor;
+    border-radius: 50%;
+    box-shadow: 0 0 0 0.375em orange;
+    -webkit-animation: spin 12s infinite linear;
+    animation: spin 12s infinite linear;
+  }
+
+  .cloud + .sun {
+    margin: -2em 1em;
+  }
+
+  .rays {
+    position: absolute;
+    top: -2em;
+    left: 50%;
+    display: block;
+    width: 0.375em;
+    height: 1.125em;
+    margin-left: -0.1875em;
+    background: yellow;
+    border-radius: 0.25em;
+    box-shadow: 0 5.375em yellow;
+  }
+
+  .rays:before, .rays:after {
+    content: '';
+    position: absolute;
+    top: 0em;
+    left: 0em;
+    display: block;
+    width: 0.375em;
+    height: 1.125em;
+    -webkit-transform: rotate(60deg);
+    transform: rotate(60deg);
+    -webkit-transform-origin: 50% 3.25em;
+    transform-origin: 50% 3.25em;
+    background: yellow;
+    border-radius: 0.25em;
+    box-shadow: 0 5.375em yellow;
+  }
+  .rays:before {
+    -webkit-transform: rotate(120deg);
+    transform: rotate(120deg);
+  }
+
+  .rain,
+  .lightning,
+  .snow {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: 20%;
+    width: 3.75em;
+    height: 3.75em;
+    margin: 0.375em 0 0 -2em;
+  //background: currentColor;
+  }
+
+  .rain:after {
+    content: '';
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    width: 1.125em;
+    height: 1.125em;
+    margin: -1em 0 0 -0.25em;
+    background: #0cf;
+    border-radius: 100% 0 60% 50% / 60% 0 100% 50%;
+    box-shadow:
+      0.625em 0.875em 0 -0.125em rgba(255,255,255,0.2),
+      -0.875em 1.125em 0 -0.125em rgba(255,255,255,0.2),
+      -1.375em -0.125em 0 rgba(255,255,255,0.2);
+    -webkit-transform: rotate(-28deg);
+    transform: rotate(-28deg);
+    -webkit-animation: rain 3s linear infinite;
+    animation: rain 3s linear infinite;
+  }
+
+  .cloud {
+    position: absolute;
+    z-index: 1;
+    width: 3.6875em;
+    height: 3.6875em;
+    margin: -1.84375em;
+    background: currentColor;
+    border-radius: 50%;
+    box-shadow:
+      -2.1875em 0.6875em 0 -0.6875em,
+      2.0625em 0.9375em 0 -0.9375em ,
+      0 0 0 0.375em lightgray,
+      -2.1875em 0.6875em 0 -0.3125em lightgray,
+      2.0625em 0.9375em 0 -0.5625em lightgray;
+  }
+  .cloud:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -0.5em;
+    display: block;
+    width: 4.5625em;
+    height: 1em;
+  //background: currentColor;
+    box-shadow: 0 0.4375em 0 -0.0625em lightgray;
+  }
+  .cloud:nth-child(2) {
+    z-index: 0;
+    background: #fff;
+    box-shadow:
+      -2.1875em 0.6875em 0 -0.6875em #fff,
+      2.0625em 0.9375em 0 -0.9375em #fff,
+      0 0 0 0.375em #fff,
+      -2.1875em 0.6875em 0 -0.3125em #fff,
+      2.0625em 0.9375em 0 -0.5625em #fff;
+    opacity: 0.3;
+    -webkit-transform: scale(0.5) translate(6em, -3em);
+    transform: scale(0.5) translate(6em, -3em);
+    -webkit-animation: cloud 4s linear infinite;
+    animation: cloud 4s linear infinite;
+  }
+  .cloud:nth-child(2):after { background: currentColor; }
+
+  .flake:before,
+  .flake:after {
+    content: '\2745';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -1.025em 0 0 -1.0125em;
+    color: #fff;
+    list-height: 1em;
+    opacity: 0.2;
+    -webkit-animation: spin 8s linear infinite reverse;
+    animation: spin 8s linear infinite reverse;
+  }
+  .flake:after {
+    margin: 0.125em 0 0 -1em;
+    font-size: 1.5em;
+    opacity: 0.4;
+    -webkit-animation: spin 14s linear infinite;
+    animation: spin 14s linear infinite;
+  }
+  .flake:nth-child(2):before {
+    margin: -0.5em 0 0 0.25em;
+    font-size: 1.25em;
+    opacity: 0.2;
+    -webkit-animation: spin 10s linear infinite;
+    animation: spin 10s linear infinite;
+  }
+  .flake:nth-child(2):after {
+    margin: 0.375em 0 0 0.125em;
+    font-size: 2em;
+    opacity: 0.4;
+    -webkit-animation: spin 16s linear infinite reverse;
+    animation: spin 16s linear infinite reverse;
+  }
+
+  .bolt {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -0.25em 0 0 -0.125em;
+    color: #fff;
+    opacity: 0.3;
+    -webkit-animation: lightning 2s linear infinite;
+    animation: lightning 2s linear infinite;
+  }
+  .bolt:nth-child(2) {
+    width: 0.5em;
+    height: 0.25em;
+    margin: -1.75em 0 0 -1.875em;
+    -webkit-transform: translate(2.5em, 2.25em);
+    transform: translate(2.5em, 2.25em);
+    opacity: 0.2;
+    -webkit-animation: lightning 1.5s linear infinite;
+    animation: lightning 1.5s linear infinite;
+  }
+
+  .bolt:before,
+  .bolt:after {
+    content: '';
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    left: 50%;
+    margin: -1.625em 0 0 -1.0125em;
+    border-top: 1.25em solid transparent;
+    border-right: 0.75em solid;
+    border-bottom: 0.75em solid;
+    border-left: 0.5em solid transparent;
+    -webkit-transform: skewX(-10deg);
+    transform: skewX(-10deg);
+  }
+  .bolt:after {
+    margin: -0.25em 0 0 -0.25em;
+    border-top: 0.75em solid;
+    border-right: 0.5em solid transparent;
+    border-bottom: 1.25em solid transparent;
+    border-left: 0.75em solid;
+    -webkit-transform: skewX(-10deg);
+    transform: skewX(-10deg);
+  }
+  .bolt:nth-child(2):before {
+    margin: -0.75em 0 0 -0.5em;
+    border-top: 0.625em solid transparent;
+    border-right: 0.375em solid;
+    border-bottom: 0.375em solid;
+    border-left: 0.25em solid transparent;
+  }
+  .bolt:nth-child(2):after {
+    margin: -0.125em 0 0 -0.125em;
+    border-top: 0.375em solid;
+    border-right: 0.25em solid transparent;
+    border-bottom: 0.625em solid transparent;
+    border-left: 0.375em solid;
+  }
+
+  /* Keyframe animations */
+
+  @-webkit-keyframes spin {
+    0%  {-webkit-transform: rotate(0deg);}
+    100% {-webkit-transform: rotate(360deg);}
+  }
+
+  @keyframes spin {
+    100% { -webkit-transform: rotate(360deg); transform: rotate(360deg); }
+  }
+
+  @-webkit-keyframes rain {
+    0% {
+      background: #0cf;
+      box-shadow:
+        0.625em 0.875em 0 -0.125em rgba(255,255,255,0.2),
+        -0.875em 1.125em 0 -0.125em rgba(255,255,255,0.2),
+        -1.375em -0.125em 0 #0cf;
+    }
+    25% {
+      box-shadow:
+        0.625em 0.875em 0 -0.125em rgba(255,255,255,0.2),
+        -0.875em 1.125em 0 -0.125em #0cf,
+        -1.375em -0.125em 0 rgba(255,255,255,0.2);
+    }
+    50% {
+      background: rgba(255,255,255,0.3);
+      box-shadow:
+        0.625em 0.875em 0 -0.125em #0cf,
+        -0.875em 1.125em 0 -0.125em rgba(255,255,255,0.2),
+        -1.375em -0.125em 0 rgba(255,255,255,0.2);
+    }
+    100% {
+      box-shadow:
+        0.625em 0.875em 0 -0.125em rgba(255,255,255,0.2),
+        -0.875em 1.125em 0 -0.125em rgba(255,255,255,0.2),
+        -1.375em -0.125em 0 #0cf;
+    }
+  }
+
+  @keyframes rain {
+    0% {
+      background: #0cf;
+      box-shadow:
+        0.625em 0.875em 0 -0.125em rgba(255,255,255,0.2),
+        -0.875em 1.125em 0 -0.125em rgba(255,255,255,0.2),
+        -1.375em -0.125em 0 #0cf;
+    }
+    25% {
+      box-shadow:
+        0.625em 0.875em 0 -0.125em rgba(255,255,255,0.2),
+        -0.875em 1.125em 0 -0.125em #0cf,
+        -1.375em -0.125em 0 rgba(255,255,255,0.2);
+    }
+    50% {
+      background: rgba(255,255,255,0.3);
+      box-shadow:
+        0.625em 0.875em 0 -0.125em #0cf,
+        -0.875em 1.125em 0 -0.125em rgba(255,255,255,0.2),
+        -1.375em -0.125em 0 rgba(255,255,255,0.2);
+    }
+    100% {
+      box-shadow:
+        0.625em 0.875em 0 -0.125em rgba(255,255,255,0.2),
+        -0.875em 1.125em 0 -0.125em rgba(255,255,255,0.2),
+        -1.375em -0.125em 0 #0cf;
+    }
+  }
+
+  @-webkit-keyframes cloud {
+    0% { opacity: 0; }
+    50% { opacity: 0.3; }
+    100% {
+      opacity: 0;
+      -webkit-transform: scale(0.5) translate(-200%, -3em);
+      transform: scale(0.5) translate(-200%, -3em);
+    }
+  }
+
+  @keyframes cloud {
+    0% { opacity: 0; }
+    50% { opacity: 0.3; }
+    100% {
+      opacity: 0;
+      -webkit-transform: scale(0.5) translate(-200%, -3em);
+      transform: scale(0.5) translate(-200%, -3em);
+    }
+  }
+
+  @-webkit-keyframes lightning {
+    45% {
+      color: #fff;
+      background: #fff;
+      opacity: 0.2;
+    }
+    50% {
+      color: #0cf;
+      background: #0cf;
+      opacity: 1;
+    }
+    55% {
+      color: #fff;
+      background: #fff;
+      opacity: 0.2;
+    }
+  }
+
+  @keyframes lightning {
+    45% {
+      color: #fff;
+      background: #fff;
+      opacity: 0.2;
+    }
+    50% {
+      color: #0cf;
+      background: #0cf;
+      opacity: 1;
+    }
+    55% {
+      color: #fff;
+      background: #fff;
+      opacity: 0.2;
+    }
+  }
+</style>

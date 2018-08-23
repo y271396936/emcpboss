@@ -1,0 +1,79 @@
+// 通用样式变量定义
+
+
+// 屏幕宽度断点
+$screen-sm: 768px;
+$screen-md: 1024px;  // 1024
+$screen-lg: 1440px; // 1366 / 1440
+$screen-xl: 1920px;
+
+// 色系
+$color-primary: #0747a6;        // 主色调
+$color-primary-active: #2684FF; // 主色激活
+$color-primary-tint: #c7e7f7;   // 主浅色
+$color-secondary: #5e6c84;      // 次色调
+$color-white: #ffffff;          // 白色
+$color-white-tint: #dddddd;     // 白浅色
+$color-light: #f5f7fa;          // 亮色
+$color-tint: #eef1f6;           // 浅色
+$color-black: #333333;          // 黑色
+$color-gray: #808080;           // 灰色
+
+$color-caution: #ff4236;        // 警示色
+$color-danger: #dd6161;         // 警示色
+$color-success: #67c23a;        // 成功色
+$color-info: #409EFF;           // 信息色
+$color-warning: #e6a23c;        // 警告色
+
+$color-bg-caution: #ffe4da;     // 警示背景色
+$color-bg-danger: #ddc8c6;      // 警示背景色
+$color-bg-success: #f0f9eb;     // 成功背景色
+$color-bg-info: #dee9fd;        // 信息背景色
+$color-bg-warning: #FDF5E6;     // 警告背景色
+
+// 大小
+$size-small: 12px;   // 通用
+$size-normal: 14px;   // 通用
+$size-bold: 16px;     // 粗
+$size-bolder: 18px;   // 更粗
+$size-lighter: 20px;  // 高亮粗
+
+// 层次
+$z-index-container: 100; // 主容器
+$z-index-slide: 200;     // 侧滑组件
+
+// 字体
+%font-size-small {
+  font-size: $size-small;
+  line-height: 1.5em;
+  @media screen and (min-width: $screen-xl) {
+    font-size: $size-normal;
+  }
+}
+%font-size-normal {
+  font-size: $size-normal;
+  line-height: 1.5em;
+  @media screen and (min-width: $screen-xl) {
+    font-size: $size-bold;
+  }
+}
+%font-size-bold {
+  font-size: $size-bold;
+  line-height: 1.5em;
+  @media screen and (min-width: $screen-xl) {
+    font-size: $size-bolder;
+  }
+}
+%font-size-bolder {
+  font-size: $size-bolder;
+  line-height: 1.5em;
+  @media screen and (min-width: $screen-xl) {
+    font-size: $size-lighter;
+  }
+}
+
+// 无缝
+%no-crack {
+  margin: 0;
+  padding: 0;
+}
